@@ -40,6 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     // get user details from frontend...
     const { fullName, email, username, password } = req.body
     // console.log("email: ", email);
+    // console.log(req.body);
 
     // validation check...
 
@@ -64,8 +65,10 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // check for avatar...
 
-    const avatarLocalPath = await req.files?.avatar?.[0]?.path;
-    const coverImageLocalPath = await req.files?.coverImage?.[0]?.path;
+    const avatarLocalPath = req.files?.avatar?.[0]?.path;
+    const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
+
+    // console.log(req.files);
 
     // let coverImageLocalPath;
     // if(req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.lenght > 0) {
@@ -86,6 +89,8 @@ const registerUser = asyncHandler(async (req, res) => {
 
     const avatar = await uploadOnCloudinary(avatarLocalPath);
     const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+
+    // console.log(avatar);
 
 
     // check for avatar...
